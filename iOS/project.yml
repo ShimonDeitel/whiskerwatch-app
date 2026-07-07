@@ -1,0 +1,75 @@
+name: Whiskerwatch
+options:
+  bundleIdPrefix: com.shimondeitel.waterintake
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  Whiskerwatch:
+    type: application
+    platform: iOS
+    sources:
+      - path: Whiskerwatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.waterintake
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: Whiskerwatch/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  WhiskerwatchTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: WhiskerwatchTests
+      - path: Whiskerwatch.storekit
+    dependencies:
+      - target: Whiskerwatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.waterintake.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  WhiskerwatchUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: WhiskerwatchUITests
+    dependencies:
+      - target: Whiskerwatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.waterintake.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Whiskerwatch:
+    build:
+      targets:
+        Whiskerwatch: all
+        WhiskerwatchTests: [test]
+        WhiskerwatchUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: Whiskerwatch.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: Whiskerwatch.storekit
+      targets:
+        - WhiskerwatchTests
+        - WhiskerwatchUITests
+    archive:
+      config: Release
